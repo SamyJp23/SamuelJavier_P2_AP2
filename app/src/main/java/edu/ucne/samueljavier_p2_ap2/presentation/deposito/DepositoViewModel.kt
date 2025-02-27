@@ -48,7 +48,7 @@ class DepositoViewModel @Inject constructor(
     fun update() {
         viewModelScope.launch {
             depositoRepository.update(
-                DepositoDto(
+                _uiState.value.depositoId,DepositoDto(
                     idDeposito = _uiState.value.depositoId,
                     fecha = _uiState.value.fecha,
                     idCuenta = _uiState.value.cuentaId,
