@@ -6,7 +6,7 @@ import java.util.Date
 class DepositoDto (
 
     val idDeposito: Int,
-    val fecha: Date,
+    val fecha: String,
     val idCuenta: Int,
     val concepto: String,
     val monto: Double

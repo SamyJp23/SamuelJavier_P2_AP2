@@ -86,6 +86,23 @@ fun DepositoBodyScreen(
                         .padding(8.dp)
                         .background(Color.White)
                 ) {
+
+
+                    OutlinedTextField(
+                        label = { Text(text = "IdCuenta") },
+                        value = uiState.idCuenta.toString(),
+                        onValueChange = { value ->
+                            viewModel.onCuentaIdChange(value.toIntOrNull() ?: 0)},
+                        modifier = Modifier.fillMaxWidth(),
+                        textStyle = LocalTextStyle.current.copy(color = Color.Black),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            disabledTextColor = Color.Black,
+                            focusedLabelColor = Color.Black,
+                            unfocusedLabelColor = Color.Black,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = Color.Black
+                        )
+                    )
                     OutlinedTextField(
                         label = { Text(text = "Concepto") },
                         value = uiState.concepto,
@@ -101,12 +118,36 @@ fun DepositoBodyScreen(
                         )
                     )
 
+                    OutlinedTextField(
+                        label = { Text(text = "Fecha") },
+                        value = uiState.fecha,
+                        onValueChange = viewModel::onFechaChange,
+                        modifier = Modifier.fillMaxWidth(),
+                        textStyle = LocalTextStyle.current.copy(color = Color.Black),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            disabledTextColor = Color.Black,
+                            focusedLabelColor = Color.Black,
+                            unfocusedLabelColor = Color.Black,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = Color.Black
+                        )
+                    )
 
-
-
-
-
-
+                    OutlinedTextField(
+                        label = { Text(text = "Monto") },
+                        value = uiState.monto.toString(),
+                        onValueChange = { value ->
+                            viewModel.onMontoChange(value.toDoubleOrNull() ?: 0.0)},
+                        modifier = Modifier.fillMaxWidth(),
+                        textStyle = LocalTextStyle.current.copy(color = Color.Black),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            disabledTextColor = Color.Black,
+                            focusedLabelColor = Color.Black,
+                            unfocusedLabelColor = Color.Black,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = Color.Black
+                        )
+                    )
                     Spacer(modifier = Modifier.padding(2.dp))
                     uiState.errorMessage?.let {
                         Text(text = it, color = Color.Red)

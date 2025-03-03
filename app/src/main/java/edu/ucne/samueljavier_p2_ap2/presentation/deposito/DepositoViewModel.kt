@@ -48,10 +48,10 @@ class DepositoViewModel @Inject constructor(
     fun update() {
         viewModelScope.launch {
             depositoRepository.update(
-                _uiState.value.depositoId,DepositoDto(
-                    idDeposito = _uiState.value.depositoId,
+                _uiState.value.idDeposito,DepositoDto(
+                    idDeposito = _uiState.value.idDeposito,
                     fecha = _uiState.value.fecha,
-                    idCuenta = _uiState.value.cuentaId,
+                    idCuenta = _uiState.value.idCuenta,
                     concepto = _uiState.value.concepto,
                     monto = _uiState.value.monto
                 )
@@ -63,7 +63,7 @@ class DepositoViewModel @Inject constructor(
         _uiState.value = DepositoUiState()
     }
 
-    fun onFechaChange(fecha: Date) {
+    fun onFechaChange(fecha: String) {
         _uiState.update { it.copy(fecha = fecha) }
     }
 
@@ -75,20 +75,20 @@ class DepositoViewModel @Inject constructor(
         _uiState.update { it.copy(monto = monto) }
     }
 
-    fun onCuentaIdChange(cuentaId: Int) {
-        _uiState.update { it.copy(cuentaId = cuentaId) }
+    fun onCuentaIdChange(idCuenta: Int) {
+        _uiState.update { it.copy(idCuenta = idCuenta ) }
     }
 
-    fun find(depositoId: Int) {
+    fun find(idDeposito: Int) {
         viewModelScope.launch {
-            depositoRepository.find(depositoId).let { depositoDto ->
+            depositoRepository.find(idDeposito).let { depositoDto ->
                 _uiState.update {
                     it.copy(
-                        depositoId = depositoDto.idDeposito,
+                        idDeposito = depositoDto.idDeposito,
                         fecha = depositoDto.fecha,
                         concepto = depositoDto.concepto,
                         monto = depositoDto.monto,
-                        cuentaId = depositoDto.idCuenta
+                        idCuenta = depositoDto.idCuenta
                     )
                 }
             }
@@ -115,13 +115,13 @@ class DepositoViewModel @Inject constructor(
     fun isValid(): Boolean {
         return _uiState.value.concepto.isNotBlank() &&
                 _uiState.value.monto > 0 &&
-                _uiState.value.cuentaId > 0
+                _uiState.value.idCuenta > 0
     }
 
     private fun DepositoUiState.toEntity() = DepositoDto(
-        idDeposito = depositoId,
+        idDeposito = idDeposito,
         fecha = fecha,
-        idCuenta = cuentaId,
+        idCuenta = idCuenta,
         concepto = concepto,
         monto = monto
     )

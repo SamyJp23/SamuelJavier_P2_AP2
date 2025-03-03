@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import edu.ucne.samueljavier_p2_ap2.presentation.deposito.DepositoListScreen
 import edu.ucne.samueljavier_p2_ap2.presentation.deposito.DepositoScreen
+import edu.ucne.samueljavier_p2_ap2.presentation.home.Home
 
 @Composable
 fun AppNavHost(navHostController: NavHostController
@@ -22,6 +23,16 @@ fun AppNavHost(navHostController: NavHostController
         navController = navHostController,
         startDestination = Screen.Home
     ) {
+
+        composable<Screen.Home>{
+            Home(
+                goToDeposito = {
+                    navHostController.navigate(Screen.DepositoListScreen)
+                }
+
+
+            )
+        }
 
         composable<Screen.DepositoScreen> {
             val depositoId = it.toRoute<Screen.DepositoScreen>().depositoId
